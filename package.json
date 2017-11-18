@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=development node build/dev-server.js",
     "build:test": "NODE_ENV=test webpack",
-    "build:prod": "NODE_ENV=production node build/build.js"
+    "build:prod": "NODE_ENV=production node build/build.js",
+    "lint": "eslint --fix --ext js --ignore-path .gitignore ."
   },
   "repository": {
     "type": "git",
