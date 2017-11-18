@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class User extends Component {
-    // state = {  }
-    render() {
-        return (
-            <div>
+  // state = {  }
+  render () {
+    return (
+      <div>
             这里是User页面
-            </div>
-        );
-    }
+      </div>
+    )
+  }
 }
 
-export default User;
+export default User

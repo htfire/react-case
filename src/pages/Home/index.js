@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Link
 } from 'react-router-dom'
@@ -6,7 +6,7 @@ import {
 import Header from '../../components/Header'
 
 class Home extends Component {
-  render() {
+  render () {
     return (
       <div>
         <Header title="首页" />
@@ -16,8 +16,8 @@ class Home extends Component {
         <Link to="/City/asdf">City</Link>
         <Link to="/City/asdf">City</Link>
       </div>
-    );
+    )
   }
 }
 
-export default Home;
+export default Home
