@@ -1,4 +1,3 @@
-// 一个常见的`webpack`配置文件
 var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -9,17 +8,11 @@ var utils = require('./utils')
 var config = require('../config')
 
 module.exports = {
-  entry: {
-    app: [
-      path.resolve(__dirname, '../src/main.js')
-    ]
-  },
+  entry: path.resolve(__dirname, '../src/main.js'),
   output: {
-    path: config.build.assetsRoot,
-    filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    path: path.resolve(__dirname, '../dist/'),
+    publicPath: '/',
+    filename: 'build.js'
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -40,7 +33,15 @@ module.exports = {
       }, {
         test: /\.less$/,
         exclude: /node_modules/,
-        loader: 'style-loader!css-loader!postcss-loader!less-loader'
+        // loader: 'style-loader!css-loader!postcss-loader!less-loader'
+        // loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!less-loader', {
+        //   publicPath: '../'
+        // })
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader!postcss-loader!less-loader',
+          publicPath: '/'
+        })
       }, {
         test: /\.css$/,
         exclude: /node_modules/,
@@ -51,6 +52,13 @@ module.exports = {
         options: {
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        }
+      }, {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
     ]
@@ -64,17 +72,13 @@ module.exports = {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    // new webpack.optimize.UglifyJsPlugin(),
-    // new ExtractTextPlugin("style.css")
-    // 热加载插件
-    // 打开浏览器
-    new OpenBrowserPlugin({
-      url: 'http://localhost:8080'
-    }),
-
+    new ExtractTextPlugin('styles.css'),
     // 可在业务 js 代码中使用 __DEV__ 判断是否是dev模式（dev模式下可以提示错误、测试报告等, production模式不提示）
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV === 'dev') || 'false'))
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
     })
   ]
 }

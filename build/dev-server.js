@@ -1,15 +1,20 @@
 var webpackConfig = require('./webpack.dev.config.js')
 var webpack = require('webpack')
 var WebpackDevServer = require('webpack-dev-server')
-webpackConfig.entry.app.unshift('webpack-dev-server/client?http://localhost:8080/', 'webpack/hot/dev-server')
-var compiler = webpack(webpackConfig)
+var opn = require('opn')
 
-var config = require('../config')
-var server = new WebpackDevServer(compiler, {
-  // contentBase:config.build.assetsRoot,
-  // publicPath: config.dev.assetsPublicPath,
-  historyApiFallback: true,
+const options = {
+  contentBase: './',
   hot: true,
+  host: 'localhost',
   inline: true
+}
+
+WebpackDevServer.addDevServerEntrypoints(webpackConfig, options)
+const compiler = webpack(webpackConfig)
+const server = new WebpackDevServer(compiler, options)
+
+server.listen(5000, 'localhost', () => {
+  console.log('dev server listening on port 5000')
 })
-server.listen(8080)
+opn('http://localhost:5000')

@@ -1,0 +1,39 @@
+.carousel-box {
+    background: white;
+}
+.carousel {
+    .carousel-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        color: #666;
+        .item {
+            width: 25%;
+            height: .6rem;
+            text-align: center;
+            line-height: .6rem;
+        }
+    }
+}
+.index-container {
+    margin-top: 10px;
+
+    ul {
+        width: 100%;
+        height: auto;
+        text-align: center;
+    }
+    li {
+        list-style: none;
+        display: inline-block;
+        height: 8px;
+        width: 8px;
+        border-radius: 4px;
+        background-color: #ccc;
+        margin: 0 3px;
+    }
+    li.selected {
+        background-color: rgb(233, 32, 61);
+    }
+}
