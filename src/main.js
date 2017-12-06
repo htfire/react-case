@@ -1,13 +1,16 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 
 import './static/css/common.less'
-
-import Home from './pages/Home'
-
 import RouterMap from './router/routerMap'
 
-ReactDOM.render(
-  <RouterMap />,
+import configureStore from './store/store'
+import BasicExample from './route-demo'
+render(
+  <Provider store={configureStore}>
+    <RouterMap />
+  </Provider>,
+  // <BasicExample />,
   document.getElementById('app')
 )
